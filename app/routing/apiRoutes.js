@@ -9,7 +9,20 @@ const apiFriends = function(app) {
     });
 
     app.post("/api/friends", function (req, res) {
-        console.log("made it to routes")
+        console.log(req.body)
+        const newFriend = req.body;
+        const totalDiff = [];
+        friends.forEach( elem => {
+            for (let i = 0; i < elem.scores.length; i++) {
+                const diff = Math.abs(newFriend.scores[i] - elem.scores[i])
+                totalDiff.push(diff);
+            }
+            
+        })
+
+        console.log(totalDiff)
+
+
         res.end()
     })
 };

@@ -2,8 +2,8 @@ $("#submitResults").click(function (e) {
     e.preventDefault()
     console.log("click")
     const newPerson = {
-        "name": $("#nameInput").val().trim(),
-        "photo": $("#photoInput").val().trim(),
+        "name": $("#nameInput").val(),
+        "photo": $("#photoInput").val(),
         "scores": [
             $("#q1").val(),
             $("#q2").val(),
@@ -17,5 +17,8 @@ $("#submitResults").click(function (e) {
             $("#q10").val(),
         ]
     }
-    
+    console.log(newPerson)
+    $.post("/api/friends", newPerson, function (res, req) {
+        console.log("Person made, post made")
+    })
 })
