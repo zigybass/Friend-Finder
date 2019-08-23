@@ -11,19 +11,30 @@ const apiFriends = function(app) {
     app.post("/api/friends", function (req, res) {
         console.log(req.body)
         const newFriend = req.body;
-        const totalDiff = [];
+        const possMatch = [];
+
         friends.forEach( elem => {
+            const totalDiff = [];
+            // console.log(totalDiff)
             for (let i = 0; i < elem.scores.length; i++) {
                 const diff = Math.abs(newFriend.scores[i] - elem.scores[i])
                 totalDiff.push(diff);
+
             }
-            
+            const poss = totalDiff.reduce( function (agg, num) {
+                return agg + num;
+            })
+            possMatch.push(poss);
+            console.log("totalDiff " + totalDiff)
         })
 
-        console.log(totalDiff)
-
-
-        res.end()
+        const bestMatch = Math.min(...possMatch);
+        console.log("pos match " + possMatch)
+        const perfectMatch = possMatch.indexOf(bestMatch)
+        console.log("best: " + bestMatch)
+        console.log("Best Friend: " + friends[perfectMatch])
+        const match = friends[perfectMatch]
+        res.json(match)
     })
 };
 

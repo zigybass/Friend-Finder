@@ -31,6 +31,10 @@
     width: 18%;
 }
 
+#endResult {
+    margin-top: 100px;
+}
+
 </style>
 
 <body>
@@ -227,7 +231,13 @@
         </div>
     </div>
 
+    <div class="container" id="endResult">
+        <img id="matchPic" src="" alt="match pic">
+    </div>
+    
+
     <script>
+
       $("#submitResults").click(function (e) {
             e.preventDefault()
             console.log("click")
@@ -248,10 +258,25 @@
                 ]
             }
             console.log(newPerson)
-            $.post("/api/friends", newPerson, function (res, req) {
+            $.post("/api/friends", newPerson, function (match) {
                 console.log("Person made, post made")
+                console.log(match.name)
+                render(match)
             })
+
+
+            $.post("/api/friends", newPerson, function (match) {
+                console.log(match.name)
+            })
+
+
         })
+
+        function render (bff) {
+            $("#body").hide();
+            $("#endResult").append(`We found the best friend match for you! It's ${bff.name}!`);
+            $("#matchPic").attr("src", bff.photo);
+        }
 
     
     </script>
