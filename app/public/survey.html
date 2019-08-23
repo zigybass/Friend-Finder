@@ -48,7 +48,7 @@
                 <h5>Name (Required)</h5>
                 <input type="text" name="name" class="form-control" id="nameInput">
                 <h5>Link to Photo Image (Required)</h5>
-                <input type="text" name="photo" class="form-control" id="exampleFormControlInput1 photoInput">
+                <input type="text" name="photo" class="form-control" id="photoInput">
                 <hr>
             </div>
         </div>
@@ -226,13 +226,18 @@
             <div class="col">
                     <button type="button" id="submitResults" class="btn btn-primary btn-lg btn-block">Submit</button>
                     <hr>
-                    <a href="/api/friends">API Friends List</a> | <a href="">GitHub Repo</a>
+                    <a href="/api/friends">API Friends List</a> | <a href="https://github.com/zigybass/Friend-Finder" target="blank">GitHub Repo</a>
             </div>
         </div>
     </div>
 
-    <div class="container" id="endResult">
-        <img id="matchPic" src="" alt="match pic">
+    <div class="container">
+        <div class="row">
+            <p class="col" id="endResult"></p>
+        </div>
+        <div class="row">
+            <img id="matchPic" src="" alt="">
+        </div>
     </div>
     
 
@@ -262,11 +267,6 @@
                 console.log("Person made, post made")
                 console.log(match.name)
                 render(match)
-            })
-
-
-            $.post("/api/friends", newPerson, function (match) {
-                console.log(match.name)
             })
 
 

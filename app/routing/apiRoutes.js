@@ -4,12 +4,12 @@ const friends = require("../data/friends")
 const apiFriends = function(app) {
 
     app.get("/api/friends", function (req, res) {
-        console.log(res)
+        // console.log(res)
         res.json(friends)
     });
 
     app.post("/api/friends", function (req, res) {
-        console.log(req.body)
+        // console.log(req.body)
         const newFriend = req.body;
         const possMatch = [];
 
@@ -29,11 +29,13 @@ const apiFriends = function(app) {
         })
 
         const bestMatch = Math.min(...possMatch);
-        console.log("pos match " + possMatch)
+        // console.log("pos match " + possMatch)
         const perfectMatch = possMatch.indexOf(bestMatch)
-        console.log("best: " + bestMatch)
-        console.log("Best Friend: " + friends[perfectMatch])
+        // console.log("best: " + bestMatch)
+        // console.log("Best Friend: " + friends[perfectMatch])
         const match = friends[perfectMatch]
+        friends.push(newFriend);
+        console.log(friends)
         res.json(match)
     })
 };
