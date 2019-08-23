@@ -31,8 +31,48 @@
     width: 18%;
 }
 
-#endResult {
+/* #endResult {
     margin-top: 100px;
+} */
+
+.popup-overlay {
+  visibility: hidden;
+  position: absolute;
+  background: #ffffff;
+  border: 2px solid #666666;
+  width: 50%;
+  height: 50%;
+  left: 25%;
+}
+
+.popup-overlay.active {
+  visibility: visible;
+  text-align: center;
+}
+
+.popup-content {
+  visibility: hidden;
+}
+
+.popup-content.active {
+  visibility: visible;
+}
+
+button {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 30px;
+  margin: .20rem;
+  font-size: 1rem;
+  color: #666666;
+  background: #ffffff;
+  border: 1px solid #666666;
+}
+
+button:hover {
+  border: 1px solid #666666;
+  background: #666666;
+  color: #ffffff;
 }
 
 </style>
@@ -231,14 +271,21 @@
         </div>
     </div>
 
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <p class="col" id="endResult"></p>
         </div>
         <div class="row">
             <img id="matchPic" src="" alt="">
         </div>
-    </div>
+    </div> -->
+
+    <div class="popup-overlay">
+            <div class="popup-content">
+              <h3 id="endResult"></h3>
+              <img id="matchPic" src="" alt="">
+              <button class="close">Close</button> </div>
+          </div>
     
 
     <script>
@@ -274,11 +321,17 @@
 
         function render (bff) {
             $("#body").hide();
-            $("#endResult").append(`We found the best friend match for you! It's ${bff.name}!`);
-            $("#matchPic").attr("src", bff.photo);
+            $(".popup-overlay, .popup-content").addClass("active");
+            $("#endResult").text(`We found the best friend match for you! It's ${bff.name}!`);
+            $("#matchPic").attr("src", bff.photo).height(250).width(250);
         }
 
-    
+        $(".close, .popup-overlay").on("click", function() {
+            $(".popup-overlay, .popup-content").removeClass("active");
+            $("#body").show();
+            $("#endResult").text("");
+
+});
     </script>
     
 </body>
