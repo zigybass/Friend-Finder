@@ -11,9 +11,9 @@ A survey to help you find friends with similar personalities.
 
 ### Tools Used
 
-I built this game using: 
-
 * Express/Node
 * Bootstrap
 * Javascript
 * VS Code 
+
+### Details
